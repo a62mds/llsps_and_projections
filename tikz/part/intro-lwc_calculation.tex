@@ -1,0 +1,50 @@
+%% mdsThesis
+%%   intro-lwc_calculation.tex
+\documentclass{standalone}
+\usepackage{mdsTikz}
+\begin{document}
+	%%
+	%% Hard coding
+	%%
+	%% colors
+	\colorlet{lightGrey}{munGrey!15}
+	\colorlet{mediumGrey}{munGrey!50}
+	\colorlet{darkGrey}{munGrey!75}
+	\pgfmathsetmacro{\polarviewangle}{70}
+	\pgfmathsetmacro{\azimuthviewangle}{115}
+	%%
+	%% Define plot parameters
+	\tdplotsetmaincoords{\polarviewangle}{\azimuthviewangle}
+	%%
+	%% Plots
+	\NewDocumentCommand{\drawlongwall}{}{%
+		\draw[draw=mediumGrey,fill=lightGrey,fill opacity=0.5] (-5,0) rectangle (5,5)
+	}
+	\NewDocumentCommand{\drawlongstrip}{}{%
+		\draw[draw=mediumGrey,fill=lightGrey,fill opacity=0.5] (-5,1) rectangle (5,0)
+	}
+	\NewDocumentCommand{\drawshortstrip}{}{%
+		\draw[draw=mediumGrey,fill=lightGrey,fill opacity=0.5] (1,0) rectangle (0,5)
+	}
+	\begin{tikzpicture}[tdplot_main_coords]
+		\begin{scope}[canvas is yz plane at x=0]
+			%% draw impact wall
+			\fill[fill=mediumGrey] (-5,-5) rectangle (5,0);
+			\drawlongwall;
+		\end{scope}
+		\foreach \z in {0,1,2,3,4,5} {
+			\begin{scope}[canvas is yx plane at z=\z]
+				\drawlongstrip;
+			\end{scope}
+		}
+		\foreach \y in {-5,-4,-3,-2,-1,0,1,2,3,4,5} {
+			\begin{scope}[canvas is xz plane at y=\y]
+				\drawshortstrip;
+			\end{scope}
+		}
+%		\begin{scope}[canvas is yz plane at x=1]
+%			\drawlongwall;
+%		\end{scope}
+	\end{tikzpicture}
+\end{document}
+%% M. Sullivan. June, 2016

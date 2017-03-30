@@ -1,0 +1,7 @@
+%% mdsThesis
+%%   sphFunctions.tex
+
+% Gaussian
+\pgfmathdeclarefunction{gaussian}{2}{
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}

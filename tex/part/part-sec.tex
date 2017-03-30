@@ -1,0 +1,86 @@
+%% articleTemplate
+%%   part-sec.tex
+\subsection{part-sec}
+\label{sub:part-sec}
+%%
+  A typical linear least squares problem involves fitting a curve to some data given in the form of a set of $m \in \bbN$ ordered pairs
+  \begin{equation}
+  \label{eqn:ordered_pair_data}
+    D := \set{\rbr{x_i, y_i}\in\bbR^2 ; i = 1, 2, \ldots, m}.
+  \end{equation}
+  If the independent and dependent variables $x$ and $y$, respectively, are known (or suspected) to be related like
+  \begin{equation}
+  \label{eqn:underlying_functional_relationship}
+    y = \sum_{j = 1}^n \alpha_j \ph_j(x),
+  \end{equation}
+  where the $\ph_j$, $j = 1, 2,\ldots, n$, are $n \in \bbN$ known functions, the problem lies in the determination of the $n$ constants $\alpha_1, \alpha_2, \ldots, \alpha_n \in \bbR$, where the number $m$ of data points is greater than the number $n$ of unknown parameters $\alpha_1, \ldots, \alpha_n$.
+  
+  Defining column vectors
+  \begin{equation}
+  \label{eqn:y_and_alpha_vectors}
+    \by := \begin{bmatrix}
+             y_1 \\
+             y_2 \\
+             \vdots \\
+             y_m
+           \end{bmatrix} \in \bbR^{m \times 1}, \quad
+    \balpha := \begin{bmatrix}
+                 \alpha_1 \\
+                 \alpha_2 \\
+                 \vdots \\
+                 \alpha_n
+               \end{bmatrix} \in \bbR^{n \times 1},
+  \end{equation}
+  and the matrix
+  \begin{equation}
+  \label{eqn:phi_matrix}
+    \bPhi := \begin{bmatrix}
+               \ph_1(x_i) & \ph_2(x_1) & \cdots & \ph_n(x_1) \\
+               \ph_1(x_2) & \ph_2(x_2) & \cdots & \ph_n(x_2) \\
+               \vdots     & \vdots     & \ddots & \vdots     \\
+               \ph_1(x_m) & \ph_2(x_m) & \cdots & \ph_n(x_m)
+             \end{bmatrix} \in \bbR^{m \times n},
+  \end{equation}
+  the system
+  \begin{equation}
+  \label{eqn:data_system_of_equations}
+    \forall i \in \set{1,\ldots,m} : y_i = \sum_{j = 1}^n \alpha_j \ph_j(x_i)
+  \end{equation}
+  can be expressed in matrix form as
+  \begin{equation}
+  \label{eqn:data_matix_equation}
+    \bPhi \balpha = \by.
+  \end{equation}
+  
+  The matrix $\bPhi$ can be uniquely associated with a linear transformation $T_{\Phi} : \bbR^n \to \bbR^m : \bx \mapsto \bPhi \bx$, where the range $T_{\Phi}(\bbR^n) \subset \bbR^m$ of $T_{\Phi}$ is just the column space
+  $$
+    \colsp{\bPhi} := \set{\bv \in \bbR^{m \times 1} ; \exists \bx \in \bbR^{n \times 1} : \bv = \bPhi \bx}
+  $$
+  of the matrix $\bPhi$. Interpreting $\colsp{\bPhi}$ as the space spanned by the columns of $\bPhi$, which are to be thought of as column vectors in $\bbR^{m \times 1}$, if $\bPhi$ has rank $n$ then $\dim(\colsp{\bPhi}) = n$, hence $T_{\Phi}(\bbR^n)$ is an $n$-dimensional subspace of $\bbR^m$. This means that, fixing $\by \in \bbR^{m \times 1}$, the equation \eqref{eqn:data_matrix_equation} is unlikely to have a solution $\balpha \in \bbR^{n \times 1}$. In most cases, the best that can be done is to find that $\balpha$ which minimizes the magnitude of the residual vector $\by - \bPhi\balpha$, so that $\bPhi\balpha$ is as close as possible to $\by$.
+  
+  Geometrically, this corresponds to the problem of solving the matrix equation
+  \begin{equation}
+  \label{eqn:projection_matrix_equation}
+    \bPhi \balpha = \proj[T_{\Phi}(\bbR^n)]{\by},
+  \end{equation}
+  where $\proj[T_{\Phi}(\bbR^n)]{\slota} : \bbR^m \to T_{\Phi}(\bbR^n)$ is the orthogonal projection operator onto the subspace $T_{\Phi}(\bbR^n) \subset \bbR^m$. It is well known that this projection operator is uniquely associated with the projection matrix $\bP_{\Phi} \in \bbR^{n \times m}$ so that
+  $$
+    \forall \by \in \bbR^m : \proj[T_{\Phi}(\bbR^n)]{\by} = \bP_{\Phi} \by,
+  $$
+  where
+  \begin{equation}
+  \label{eqn:projection_matrix_definition}
+    \bP_{\Phi} := \bPhi \inv{\rbr{\bPhi^T\bPhi}} \bPhi^T,
+  \end{equation}
+  and so the problem becomes finding a solution to the matrix equation
+  \begin{equation}
+  \label{eqn:projection_matrix_equation_with_projection_matrix}
+    \bPhi \balpha = \bPhi \inv{\rbr{\bPhi^T\bPhi}} \bPhi^T \by.
+  \end{equation}
+  
+  Multiplying both sides of equation \eqref{eqn:projection_matrix_equation_with_projection_matrix} by $\bPhi^T$ and carrying out the appropriate simplifications yields the so-called \emph{normal equations}
+  \begin{equation}
+  \label{eqn:normal_equations}
+    \bPhi^T \bPhi \balpha = \bPhi^T \by.
+  \end{equation}
+%% M. Sullivan. March, 2017

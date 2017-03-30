@@ -1,0 +1,28 @@
+%% articleTemplate
+%%   main.tex
+%%%%
+%% LaTeX article template
+%% Mitch Sullivan
+%% March, 2017
+%%%%
+\documentclass[12pt]{article}
+\usepackage{preamble}
+\begin{document}
+  %%%%
+  %% Front matter
+  \pagenumbering{roman}     % change page numbering to roman for front matter
+    %\include{tex/front/...}
+  %%%%
+  %% Main body
+  \pagenumbering{arabic}    % change page numbering to Arabic for rest of thesis
+  \setcounter{page}{1}      % reset page counter back to 1
+    \include{tex/part/part} % section
+  %%%%
+  %% Appendices
+  \appendix
+    %\include{tex/appendix/...}
+  %%%%
+  %% Bibliography
+    \include{bib/bib}
+\end{document}
+%% M. Sullivan. March, 2017

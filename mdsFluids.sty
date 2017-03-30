@@ -1,0 +1,49 @@
+%%
+%% mdsFluids.sty
+%%
+\NeedsTeXFormat{LaTeX2e}
+%%
+\ProvidesPackage{mdsFluids}
+%%
+\RequirePackage[T1]{fontenc}	% Adobe type-1 font encoding
+\RequirePackage{amssymb}
+\RequirePackage{mathtools}
+\RequirePackage{nccmath}
+\RequirePackage{stmaryrd}    % for jump condition square brackets
+\RequirePackage{xparse}
+%%
+%%==============================================================================
+%% Physical quantity symbol macros
+%%------------------------------------------------------------------------------
+\NewDocumentCommand{\surftens}{}{\sigma}
+%%------------------------------------------------------------------------------
+%% Physical quantity symbol macros
+%%==============================================================================
+%%
+%%==============================================================================
+%% Nondimensional numbers
+%%------------------------------------------------------------------------------
+%% Knudsen number
+\NewDocumentCommand{\Kn}{}{\mathrm{Kn}}
+%% Ohnesorge number
+\NewDocumentCommand{\On}{}{\mathrm{On}}
+%% Reynolds number
+\RenewDocumentCommand{\Re}{}{\mathrm{Re}}
+%% Weber number
+\NewDocumentCommand{\We}{}{\mathrm{We}}
+%%------------------------------------------------------------------------------
+%% Nondimensional numbers
+%%==============================================================================
+%%
+%%==============================================================================
+%% Operators
+%%------------------------------------------------------------------------------
+%% Material derivative
+\NewDocumentCommand{\mderiv}{m}{\frac{D#1}{Dt}}
+%% Jump operator
+\NewDocumentCommand{\jmp}{m}{\left\llbracket#1\right\rrbracket}
+%%------------------------------------------------------------------------------
+%% Operators
+%%==============================================================================
+\endinput
+%% M. Sullivan. July, 2016
